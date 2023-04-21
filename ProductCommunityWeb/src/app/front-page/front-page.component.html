@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Domine:wght@600&display=swap" rel="stylesheet">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+        <path
+            d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+    </svg>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="image">
+        <div class="">
+            <div class="links">
+                <a routerLink="/login/user" class="login heading" href="#">Login /</a><a routerLink="/register/user"
+                    class="login" href="">Register /</a><a routerLink="/login/admin" class="login" href="">Admin</a>
+            </div>
+            <div class="food">
+                <h3 class="heading2">FOOD IS LOVE</h3>
+                <div class="about">
+                    <p>Food is not simply stuff that people eat when their hungry. Food is awesome, delicious,
+                        inventive, colorful, inspiring, and so much more. A mutual love of food can bring different
+                        people together and can make the saddest person feel a little better without even meaning to. I
+                        love food and think you should too.</p>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="container" style="margin-top: 30vh;">
+                    <div class="row">
+                        <div class="col-3">
+                            <div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <i class="fas fa-user-friends fa-4x "></i>
+                                    </div>
+                                    <div class="col">
+                                        <div style="color: white;">
+                                            <p>{{userCount}}</p>
+                                            <p>USERS</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="row">
+                                <div class="col-4">
+                                    <i class="fas fa-comments fa-4x"></i>
+                                </div>
+                                <div class="col">
+                                    <div style="color: white;">
+                                        <p>{{reviewCount}}</p>
+                                        <p>REVIEWS</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="row">
+                                <div class="col-4">
+                                    <i class="fab fa-product-hunt fa-4x "></i>
+                                </div>
+                                <div class="col">
+                                    <div style="color: white;">
+                                        <p>{{productCount}}</p>
+                                        <p>PRODUCTS</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

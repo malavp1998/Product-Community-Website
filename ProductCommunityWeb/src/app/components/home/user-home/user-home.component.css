@@ -1,0 +1,34 @@
+.navbar-nav {
+    margin-left: auto;
+}
+
+.bg-light {
+    background-color: rgb(7, 205, 205);
+}
+
+ngb-rating {
+    color: #c42716;
+    font-size: 30px;
+}
+
+i {
+    position: relative;
+    display: inline-block;
+    font-size: 1.5rem;
+    padding-right: 0.1rem;
+    color: #d3d3d3;
+}
+
+.filled {
+    color: rgb(88, 53, 245);
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+td,
+th {
+    width: 15%;
+    text-align: center;
+}

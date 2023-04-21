@@ -1,0 +1,207 @@
+<app-home-dashboard></app-home-dashboard>
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-sm bg-light">
+        <a class="navbar-brand" href="#">Hello <span
+                style="color: rgb(10, 16, 23);font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">{{userName}}</span></a>
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="open(content)">Add New
+                    Product</button>
+            </li>
+            <li class="nav-item">
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                        name="searhString">
+                </form>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </li>
+            <li class="nav-item ">
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" routerLink="/">Logout</button>
+            </li>
+        </ul>
+    </nav>
+    <div id="tabs" #tabs>
+
+        <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" href="#proudct" [ngClass]="{ 'active':activeTab==='product'}" data-toggle="tab"
+                    (click)="result('product', $event)"><span
+                        style="margin-right: 3px; color: rgba(237, 3, 3, 0.765); font-weight:1000 ; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">{{products.length}}</span>
+                    Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#search" [ngClass]="{ 'active':activeTab==='search'}"
+                    (click)="search('search', $event)" data-toggle="tab"><span
+                        style="margin-right: 3px; color: rgba(237, 3, 3, 0.765); font-weight:1000 ; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">{{approveReviewCount}}</span>Approved
+                    Reviews</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#results" [ngClass]="{ 'active':activeTab==='result'}" data-toggle="tab"
+                    (click)="result('result', $event)"><span
+                        style="margin-right: 3px; color: rgba(237, 3, 3, 0.765); font-weight:1000 ; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">{{unApproveReviewCount}}</span>UnApproved
+                    Reviews</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane" id="search" [ngClass]="{ 'active':activeTab==='search'}">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Product Code</th>
+                            <th scope="col">Product Brand</th>
+                            <th scope="col">Rating</th>
+                            <th scope="col">Review</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let review of reviews ; let i = index">
+                            <tr *ngIf="review.reviewApproved === true">
+                                <th scope="row">{{review.reviewId}}</th>
+                                <th>{{review["product"].name}}</th>
+                                <th>{{review["product"].code}}</th>
+                                <th>{{review["product"].brand}}</th>
+                                <td>{{review.rating}}</td>
+                                <td>{{review.review}}</td>
+                                <td><button class="btn btn-danger" (click)="unApproveReview(review.reviewId)">
+                                        Denial</button></td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="results" [ngClass]="{ 'active':activeTab==='result'}">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Product Code</th>
+                            <th scope="col">Product Brand</th>
+                            <th scope="col">Rating</th>
+                            <th scope="col">Review</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let review of reviews ; let i = index">
+                            <tr *ngIf="review.reviewApproved === false">
+                                <th scope="row">{{review.reviewId}}</th>
+                                <th>{{review["product"].name}}</th>
+                                <th>{{review["product"].code}}</th>
+                                <th>{{review["product"].brand}}</th>
+                                <td>{{review.rating}}</td>
+                                <td>{{review.review}}</td>
+                                <td><button class="btn btn-primary" (click)="ApproveReview(review.reviewId)">Approve
+                                    </button></td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="product" [ngClass]="{ 'active':activeTab==='product'}">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Brand</th>
+                            <th scope="col">Code</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Avg Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of products ; let i = index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{product.name}}</td>
+                            <td>{{product.brand}}</td>
+                            <td>{{product.code}}</td>
+                            <td>
+                                {{product.price}}
+                            </td>
+                            <td>
+                                <ng-template #t let-fill="fill">
+                                    <i class="bi bi-star">
+                                        <i *ngIf="fill > 0" class="bi bi-star-fill filled" [style.width.%]="fill"></i>
+                                    </i>
+                                </ng-template>
+
+                                <ngb-rating [(rate)]="product.avgRating" [starTemplate]="t" [readonly]="true" [max]="5">
+                                </ngb-rating>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form #loginForm="ngForm" (ngSubmit)="addProudct(loginForm.value)">
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputPassword" placeholder="name" name="name" ngModel>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Brand:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputPassword" placeholder="brand" name="brand" ngModel>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Code:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputPassword" placeholder="code" name="code" ngModel>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Price</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="inputPassword" placeholder="price" name="price"
+                        ngModel>
+                </div>
+            </div>
+
+            <button type="submit" (click)="modal.close('Save click')" class="btn btn-success btn-block btn-sm"
+                style="margin-top: 10px;">ADD
+                PRODUCT</button>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>

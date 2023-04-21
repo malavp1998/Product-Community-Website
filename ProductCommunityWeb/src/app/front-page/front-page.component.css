@@ -1,0 +1,49 @@
+#image {
+    background-image: url("../../assets/background2.jpg");
+    background-size: 100%; 
+    overflow: hidden;
+    height: 100vh;
+}
+
+.login{
+    
+    color: rgb(215, 204, 198);
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+#loginImage{
+    background-image: url("../../assets/loginPicture.jpg");
+    width: 100px;
+    height: 100px;
+    
+}
+
+.heading{
+    margin-left: 85%;
+}
+
+.food{
+    width: 100px;
+    color: rgba(255, 255, 255, 0.838);
+    margin-top: 12%;
+    margin-left: 60%;
+
+}
+
+.about{
+    margin-top: 15px;
+    width: 300px;
+}
+
+.heading2{
+    font-size:x-large;
+    font-family: 'Domine', serif;
+    
+}
+
+.links{
+    margin-top: 15px;
+    
+}
+

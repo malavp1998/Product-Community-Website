@@ -1,0 +1,35 @@
+#background {
+
+    background-image: url("../../../assets/MicrosoftTeams3.png");
+
+    background-size: 100%;
+
+    overflow: hidden;
+
+    height: 50vh;
+
+}
+
+
+
+.header {
+
+    color: rgb(228, 234, 239);
+
+    margin-top: 20px;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+
+
+.text {
+
+    color: rgb(149, 225, 139);
+
+    margin-top: 30px;
+
+
+
+}

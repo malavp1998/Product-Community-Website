@@ -1,0 +1,59 @@
+#intro {
+
+    /* background-image: url(https://mdbootstrap.com/img/new/fluid/city/008.jpg); */
+
+    background-image: url("../../../assets/MicrosoftTeams-image.png");
+
+    height: 100vh;
+
+}
+
+
+
+/* Height for devices larger than 576px */
+
+@media (min-width: 992px) {
+
+    #intro {
+
+        margin-top: -58.59px;
+
+    }
+
+}
+
+
+
+.navbar .nav-link {
+
+    color: rgb(179, 76, 76) !important;
+
+}
+
+
+
+.register {
+
+    text-decoration: none;
+
+}
+
+
+
+.login {
+
+    background-color: rgb(202, 183, 179);
+
+}
+
+
+
+.part {
+
+    color: rgb(139, 175, 206);
+
+    background-color: rgba(7, 7, 7, 0.553);
+
+
+
+}

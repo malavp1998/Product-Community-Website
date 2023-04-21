@@ -1,0 +1,173 @@
+<app-home-dashboard></app-home-dashboard>
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-sm bg-light">
+        <a class="navbar-brand" href="#">Hello <span
+                style="color: rgb(10, 16, 23);font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">{{userName}}</span></a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <form class="form-inline" #loginForm="ngForm" (ngSubmit)="searchProduct()">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                        name="searhString" [(ngModel)]="searhString">
+                </form>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                    (click)="searchProduct()">Search</button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-outline-danger my-2 my-sm-0" routerLink="" type="submit">Logout</button>
+            </li>
+        </ul>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">ProductID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Brand</th>
+                                <th scope="col">Code</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Avg Rating</th>
+                                <th scope="col">Reviews</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of products ; let i = index">
+                                <th scope="row">{{i}}</th>
+                                <td>{{product.name}}</td>
+                                <td>{{product.brand}}</td>
+                                <td>{{product.code}}</td>
+                                <td>
+                                    {{product.price}}
+                                </td>
+                                <td>
+                                    <ng-template #t let-fill="fill">
+                                        <i class="bi bi-star">
+                                            <i *ngIf="fill > 0" class="bi bi-star-fill filled"
+                                                [style.width.%]="fill"></i>
+                                        </i>
+                                    </ng-template>
+
+                                    <ngb-rating [(rate)]="product.avgRating" [starTemplate]="t" [readonly]="true"
+                                        [max]="5">
+                                    </ngb-rating>
+                                </td>
+                                <td><button class="btn btn-primary" (click)="showReview(product.productId)"
+                                        (click)="open(content)">View Reviews</button>
+                                </td>
+                                <td> <button class="btn btn-primary" (click)="setActiveProductId(product.productId)"
+                                        (click)="open(addreview)">Add Review</button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="mcontentodal-title" id="modal-basic-title">Reviews</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">REVEIW ID</th>
+                            <th scope="col">RATING</th>
+                            <th scope="col">REVIEW</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let review of reviews ; let i = index">
+                            <tr *ngIf="review.reviewApproved === true">
+                                <th scope="row">{{review.reviewId}}</th>
+                                <td>{{review.rating}}</td>
+                                <td>{{review.review}}</td>
+                            </tr>
+                        </ng-container>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+        </div>
+    </ng-template>
+
+
+
+
+    <ng-template #addreview let-modal>
+        <div class="modal-header">
+            <h4 class="mcontentodal-title" id="modal-basic-title">Add Review</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <form #loginForm="ngForm" (ngSubmit)="addReview(loginForm.value)">
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Review</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputPassword" placeholder="Add review here.."
+                            name="review" ngModel>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Rating</label>
+                    <div class="col-sm-10">
+                        <div class="form-check form-check-inline" style="margin-top: 10px;">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                                value="1" checked name="rating" ngModel>
+                            <label class="form-check-label" for="exampleRadios1">
+                                1
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                                value="2" name="rating" ngModel>
+                            <label class="form-check-label" for="exampleRadios2">
+                                2
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
+                                value="3" name="rating" ngModel>
+                            <label class="form-check-label" for="exampleRadios3">
+                                3
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4"
+                                value="4" name="rating" ngModel>
+                            <label class="form-check-label" for="exampleRadios4">
+                                4
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5"
+                                value="5" name="rating" ngModel>
+                            <label class="form-check-label" for="exampleRadios5">
+                                5
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" (click)="modal.close('Save click')" class="btn btn-success btn-block btn-sm"
+                    style="margin-top: 10px;">ADD
+                    REVIEW</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+        </div>
+    </ng-template>
